@@ -11,6 +11,8 @@ BasicUpstart2(main)
 .label Velvet_left = 176    // For your overlay, remember its 0,1,2 and three (0 is 1st sprite)
 // so if you have 6 animations your first right anim sprite is 0-5 and the left anim would be 6-11
 
+.label FrameCounter = $02a8 // our free byte for animation counting
+
 main:
 // ** Clearing screen
 
@@ -53,11 +55,24 @@ main:
     lda #BLACK         // black for our sprite
     sta SP0COL + 1      // Sprite colour 1 $d027
 
+
+// Framecounter initialise
+    lda #0              // set to 0
+    sta FrameCounter
+
 // -----------------------------------------------------------------------------    
 GAMELOOP:
     lda #240            //scanline -A
     cmp RASTER          // compare A to current Raster line
     bne GAMELOOP
+
+    inc FrameCounter
+    lda FrameCounter
+    cmp #64             // based on 4 frames
+    bne KeyboardTEST
+    lda #0
+    sta FrameCounter
+
            
 KeyboardTEST:       // testig for key press A & D
     lda 197
@@ -100,6 +115,15 @@ Going_left:
     dec SP0X
     dec SP0X + 2
     jmp GAMELOOP
+
+// --------------------------------------
+Calculate_Sprite_Frames:
+    lda FrameCounter    // should be 16
+    lsr // /2
+    lsr // /4
+    lsr // /6
+    lsr // /8
+    lsr // /10
 
 GAMELOOPEND:
     jmp GAMELOOP
