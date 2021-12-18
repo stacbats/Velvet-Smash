@@ -8,10 +8,11 @@ BasicUpstart2(main)
 
 .label Velvet_right = 170   // Using the sprite sheet from char pad remember how many animations
 // you have going right as well as any overlays.
-.label Velvet_left = 176    // For your overlay, remember its 0,1,2 and three (0 is 1st sprite)
+.label Velvet_left = 178    // For your overlay, remember its 0,1,2 and three (0 is 1st sprite)
 // so if you have 6 animations your first right anim sprite is 0-5 and the left anim would be 6-11
 
 .label FrameCounter = $02a8 // our free byte for animation counting
+.label Sprite_FrameCounter = $02a9
 
 main:
 // ** Clearing screen
@@ -29,7 +30,7 @@ main:
 
 
     // ******* SPRITE 0
-    lda #SPRITERAM +12       // load the sprite Number ( Screen ram starts at 1024, we add + 1016)
+    lda #SPRITERAM +16       // load the sprite Number ( Screen ram starts at 1024, we add + 1016)
     //  So the address for Sprite 0 is 2040 (see below)
     sta SPRITE0              // this tells us where the Sprite pointer is (2040 in this case)
    // ******* SPRITE 1
@@ -38,7 +39,7 @@ main:
 
     lda #3              // enabling sprite 0+1 ( %0000 0011)
     sta SPENA           // $d015
-    sta YXPAND      // ***  DOUBLE SPRITE SIZE Y    ***
+ //   sta YXPAND      // ***  DOUBLE SPRITE SIZE Y    ***
     sta XXPAND      // ***  DOUBLE SPRITE SIZE X    ***
     lda #0              // using 0 as turning multi color off
     sta SPMC            // Sprite multi or hires
@@ -68,7 +69,7 @@ GAMELOOP:
 
     inc FrameCounter
     lda FrameCounter
-    cmp #64             // based on 4 frames
+    cmp #64           // 64 based on 4 frames
     bne KeyboardTEST
     lda #0
     sta FrameCounter
@@ -92,13 +93,18 @@ TestForAKey:
 //   SPRITE Movement
 // -----------------------------------------------------------------------------
 UpdateVELVET:
+    jsr Calculate_Sprite_Frames
     lda VelvetDirection
     bmi Going_left         // only need to test one direction
     
     // ** Move bytes for Right
     lda #Velvet_right
+    clc
+    adc Sprite_FrameCounter
     sta SPRITE0 + 1
-    lda #Velvet_right+12
+    lda #Velvet_right+16
+    clc
+    adc Sprite_FrameCounter
     sta SPRITE0
 
     inc SP0X
@@ -108,8 +114,12 @@ UpdateVELVET:
 Going_left:
     // ** Move bytes for Left
     lda #Velvet_left
+    clc
+    adc Sprite_FrameCounter
     sta SPRITE0 + 1
-    lda #Velvet_left + 12
+    lda #Velvet_left + 16
+    clc
+    adc Sprite_FrameCounter
     sta SPRITE0
 
     dec SP0X
@@ -118,22 +128,27 @@ Going_left:
 
 // --------------------------------------
 Calculate_Sprite_Frames:
-    lda FrameCounter    // should be 16
-    lsr // /2
-    lsr // /4
-    lsr // /6
-    lsr // /8
-    lsr // /10
+    inc FrameCounter
+    lda FrameCounter
+    and #%00111111 // 63
+    sta FrameCounter
+    lsr 
+    lsr
+    lsr
 
-GAMELOOPEND:
-    jmp GAMELOOP
+//    lda FrameCounter    // should be 16
+//    lsr // /2
+//    lsr // /4
+//   lsr // /8
+ //   lsr // /16
 
-
-    rts // returning to basic
+ 
+    sta Sprite_FrameCounter
+    rts
 
 
 * = $2a80 "Sprite Data"
-.import binary "Velvet_smash_Sprites.bin"
+.import binary "Velvet_smash - Sprites.bin"
 
 
 

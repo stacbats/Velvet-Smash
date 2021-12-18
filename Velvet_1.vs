@@ -4,12 +4,12 @@ al C:ffae .krljmp_UNLSN
 al C:ff90 .krljmp_SETMSG
 al C:aa .Velvet_right
 al C:ffcf .krljmp_CHRIN
-al C:866 .TestForAKey
+al C:877 .TestForAKey
 al C:c5 .krljmpLSTX
 al C:ff81 .krljmp_PCINT
 al C:ffa5 .krljmp_ACPTR
-al C:872 .UpdateVELVET
-al C:858 .KeyboardTEST
+al C:883 .UpdateVELVET
+al C:869 .KeyboardTEST
 al C:ff84 .krljmp_IOINIT
 al C:d027 .SP0COL
 al C:d024 .BGCOL3
@@ -50,11 +50,11 @@ al C:ffa8 .krljmp_CIOUT
 al C:d018 .VMCSB
 al C:d411 .PWHI3
 al C:d40a .PWHI2
-al C:89d .GAMELOOPEND
 al C:d403 .PWHI1
+al C:2a8 .FrameCounter
 al C:d026 .SPMC1
 al C:d025 .SPMC0
-al C:b0 .Velvet_left
+al C:b2 .Velvet_left
 al C:ffa2 .krljmp_SETTMO
 al C:dc00 .CIAPRA
 al C:dc01 .CIAPRB
@@ -65,6 +65,7 @@ al C:d015 .SPENA
 al C:45 .ZeroPageLow
 al C:ffc3 .krljmp_CLOSE
 al C:d01c .SPMC
+al C:2a9 .Sprite_FrameCounter
 al C:400 .SCREENRAM
 al C:d401 .FREHI1
 al C:d016 .SCROLX
@@ -72,7 +73,7 @@ al C:d011 .SCROLY
 al C:2a7 .VelvetDirection
 al C:46 .ZeroPageHigh
 al C:d418 .SIGVOL
-al C:851 .GAMELOOP
+al C:853 .GAMELOOP
 al C:d40f .FREHI3
 al C:d408 .FREHI2
 al C:ff96 .krljmp_TKSA
@@ -87,7 +88,7 @@ al C:ff99 .krljmp_MEMTOP
 al C:2 .ZeroPageTemp
 al C:d01b .SPBGPR
 al C:fff3 .krljmp_BASE
-al C:88a .Going_left
+al C:8a6 .Going_left
 al C:77 .ZeroPageParam5
 al C:76 .ZeroPageParam4
 al C:75 .ZeroPageParam3
@@ -109,6 +110,7 @@ al C:ffe7 .krljmp_CLALL
 al C:ffcc .krljmp_CLRCHN
 al C:ff8a .krljmp_RESTOR
 al C:d010 .MSIGX
+al C:8c1 .Calculate_Sprite_Frames
 al C:d412 .VCREG3
 al C:d40b .VCREG2
 al C:d404 .VCREG1

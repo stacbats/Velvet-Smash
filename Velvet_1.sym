@@ -4,12 +4,12 @@
 .label krljmp_SETMSG=$ff90
 .label Velvet_right=$aa
 .label krljmp_CHRIN=$ffcf
-.label TestForAKey=$866
+.label TestForAKey=$877
 .label krljmpLSTX=$c5
 .label krljmp_PCINT=$ff81
 .label krljmp_ACPTR=$ffa5
-.label UpdateVELVET=$872
-.label KeyboardTEST=$858
+.label UpdateVELVET=$883
+.label KeyboardTEST=$869
 .label krljmp_IOINIT=$ff84
 .label SP0COL=$d027
 .label BGCOL3=$d024
@@ -49,11 +49,11 @@
 .label VMCSB=$d018
 .label PWHI3=$d411
 .label PWHI2=$d40a
-.label GAMELOOPEND=$89d
 .label PWHI1=$d403
+.label FrameCounter=$2a8
 .label SPMC1=$d026
 .label SPMC0=$d025
-.label Velvet_left=$b0
+.label Velvet_left=$b2
 .label krljmp_SETTMO=$ffa2
 .label CIAPRA=$dc00
 .label CIAPRB=$dc01
@@ -64,6 +64,7 @@
 .label ZeroPageLow=$45
 .label krljmp_CLOSE=$ffc3
 .label SPMC=$d01c
+.label Sprite_FrameCounter=$2a9
 .label SCREENRAM=$400
 .label FREHI1=$d401
 .label SCROLX=$d016
@@ -71,7 +72,7 @@
 .label VelvetDirection=$2a7
 .label ZeroPageHigh=$46
 .label SIGVOL=$d418
-.label GAMELOOP=$851
+.label GAMELOOP=$853
 .label FREHI3=$d40f
 .label FREHI2=$d408
 .label krljmp_TKSA=$ff96
@@ -86,7 +87,7 @@
 .label ZeroPageTemp=$2
 .label SPBGPR=$d01b
 .label krljmp_BASE=$fff3
-.label Going_left=$88a
+.label Going_left=$8a6
 .label ZeroPageParam5=$77
 .label ZeroPageParam4=$76
 .label ZeroPageParam3=$75
@@ -108,6 +109,7 @@
 .label krljmp_CLRCHN=$ffcc
 .label krljmp_RESTOR=$ff8a
 .label MSIGX=$d010
+.label Calculate_Sprite_Frames=$8c1
 .label VCREG3=$d412
 .label VCREG2=$d40b
 .label VCREG1=$d404
